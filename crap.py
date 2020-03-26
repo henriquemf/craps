@@ -84,20 +84,28 @@ def fase_point(fichas1,fichas2):
         print("Você perdeu! Que pena!")
         fichas1-=fichas2
         print("Você está com",fichas1,"fichas")
+fichas1=50
 pergunta=input("Você quer jogar Craps? ")
 if pergunta=="não":
     print("Ok! Até a próxima!")
 else:
-    print("Vamos começar a jogar!")
-    fichas1=50
-    print("Você começa com 50 fichas!")
-    aposta=int(input("Que tipo de aposta você quer? Digite 1 para Twelve, 2 para Any Craps e 3 para Field ou 4 para nenhuma dessas e que seja uma aposta normal"))
-    fichas2=int(input("Quantas fichas quer apostar?"))
-    if aposta==1:
-        twelve(fichas1,fichas2)
-    elif aposta==2:
-        any_craps(fichas1,fichas2)
-    elif aposta==3:
-        field(fichas1,fichas2)
-    elif aposta==4:
-        pass_line_bet(fichas1,fichas2)
+    craps=True
+    while craps:
+        print("Vamos começar a jogar!")
+        print("Você começa com",fichas1,"fichas!")
+        aposta=int(input("Que tipo de aposta você quer? Digite 1 para Twelve, 2 para Any Craps e 3 para Field ou 4 para nenhuma dessas e que seja uma aposta normal"))
+        fichas2=int(input("Quantas fichas quer apostar?"))
+        if aposta==1:
+            twelve(fichas1,fichas2)
+        elif aposta==2:
+            any_craps(fichas1,fichas2)
+        elif aposta==3:
+            field(fichas1,fichas2)
+        elif aposta==4:
+            pass_line_bet(fichas1,fichas2)
+        pergunta=input("Você quer jogar novamente?")
+        if pergunta=="não":
+            print("Ok! Obrigado por jogar!")
+            craps=False
+        elif pergunta=="sim":
+            craps=True       
