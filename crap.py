@@ -15,61 +15,81 @@
 import random
 pergunta=input("Você quer jogar Craps?")
 craps=True
-if pergunta=="não":
-    craps=False
-    print("Ok!Até mais!")
 soma=0
-while craps:
-    contador=0
+def fase_point(fichas1,fichas2,soma):
+    point=True
+    var_point=soma
     dado1=random.randint(1,6)
     dado2=random.randint(1,6)
     soma=dado1 + dado2
-    fichas1=50
-    fichas2=int(input("Quantas fichas você quer apostar? "))
-    if fichas1==0:
-        print("Acabaram suas fichas, tchau!")
-        craps=False
-    elif fichas2>fichas1:
-        fichas2=int(input("Você não pode apostar mais do que tem. Quanto quer apostar? "))
-    elif soma==7 or soma==11:
-        print("Parabéns, você venceu!")
-        fichas1=fichas2+fichas1
-        pergunta=input("Você quer jogar novamente?")
-        contador+=1
-        if pergunta=="não":
-            craps=False
-    elif soma==2 or soma==3 or soma==12:
-        print("CRAPS! Você perdeu!")
-        fichas1=fichas1-fichas2
-        pergunta=input("Você quer jogar novamente?")
-        contador+=1
-        if pergunta=="não":
-            craps=False
-    elif soma==4 or soma==5 or soma==6 or soma==8 or soma==9 or soma==10:
-        point=True
-        print("Você está indo para a fase Point")
-        contador+=1
-        while point:
-            dado1=random.randint(1,6)
-            dado2=random.randint(1,6)
-            soma=[0]*contador
-            while soma[contador-1]!=7 or soma[contador-1]!=soma[contador-2]:
-                point=True
-                print("Vamos tentar de novo!")
-                contador+=1
-            if soma==7:
-                print("Você perdeu!")
-                point = False
-                fichas1=fichas1-fichas2
-                pergunta=input("Você quer jogar novamente?")
-                if pergunta=="não":
-                    craps=False
-            elif soma[contador-1]==soma[contador-2]:
-                print("Você ganhou!")
-                fichas1=fichas1+fichas2
+    while point:
+        dado1=random.randint(1,6)
+        dado2=random.randint(1,6)
+        soma=dado1+dado2
+        if soma==var_point:
+            print("Você ganhou!")
+            point = False
+            fichas1+=fichas2
+            print("Você tem, atualmente,",fichas1,"fichas")
+            pergunta=input("Você quer jogar novamente?")
+            if pergunta=="não":
                 point=False
-                pergunta=input("Você quer jogar novamente?")
-                if pergunta=="não":
-                    craps=False
-print("Obrigado, por jogar!")
-print(fichas1)
+                print("Obrigado por jogar")
+            else:
+                pass_line_bet()
+        elif soma==7:
+            print("Você perdeu!")
+            fichas1-=fichas2
+            print("Você tem, atualmente,",fichas1,"fichas")
+            point=False
+            pergunta=input("Você quer jogar novamente?")
+            if pergunta=="não":
+                point=False
+                print("Obrigado por jogar!")
+            else:
+                pass_line_bet()
+        else:
+            var_point=soma
+    point=False      
+def pass_line_bet():
+    craps=True
+    while craps:
+        dado1=random.randint(1,6)
+        dado2=random.randint(1,6)
+        soma=dado1 + dado2
+        fichas1=50
+        fichas2=int(input("Quantas fichas você quer apostar? "))
+        if fichas1==0:
+            print("Acabaram suas fichas, tchau!")
+            craps=False
+        elif fichas2>fichas1:
+            fichas2=int(input("Você não pode apostar mais do que tem. Quanto quer apostar? "))
+        elif soma==7 or soma==11:
+            print("Parabéns, você venceu!")
+            fichas1+=fichas2
+            print("Você tem, atualmente,",fichas1,"fichas")
+            pergunta=input("Você quer jogar novamente?")
+            if pergunta=="não":
+                craps=False
+                print("Obrigado por jogar!")
+            else:
+                pass_line_bet()
+        elif soma==2 or soma==3 or soma==12:
+            print("CRAPS! Você perdeu!")
+            fichas1=fichas1-fichas2
+            print("Você tem, atualmente,",fichas1,"fichas")
+            pergunta=input("Você quer jogar novamente?")
+            if pergunta=="não":
+                craps=False
+                print("Obrigado por jogar!")
+            else:
+                pass_line_bet()
+        elif soma==4 or soma==5 or soma==6 or soma==8 or soma==9 or soma==10:
+            print("Você está indo para a fase Point")
+            fase_point(fichas1,fichas2,soma)
+    craps=False
+if pergunta=="não":
+    craps=False
+    print("Ok!Até mais!")
+else:
+    pass_line_bet()
