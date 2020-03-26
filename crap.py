@@ -76,8 +76,9 @@ def pass_line_bet(fichas1,fichas2):   #Função que determina a aposta Pass Line
         print("Você está com",fichas1,"fichas")
     elif soma==4 or soma==5 or soma==6 or soma==8 or soma==9 or soma==10:
         print("POINT! Você vai para a fase Point!")
-        fase_point(fichas1,fichas2)
-def fase_point(fichas1,fichas2):     #Função que determina a fase Point
+        point=soma
+        fase_point(fichas1,fichas2,point)
+def fase_point(fichas1,fichas2,point):     #Função que determina a fase Point
     aposta=int(input("Como você quer prosseguir? Para Twelve digite 1, para Any Craps digite 2, para Field digite 3 e, para continuar no Point, digite 4 "))
     if aposta==1:
         entrar_point=False
@@ -92,24 +93,23 @@ def fase_point(fichas1,fichas2):     #Função que determina a fase Point
         entrar_point=True
         while entrar_point:
             soma=roda_dados()
-            point=soma
-            while soma!=7 or soma!=point and entrar_point:
+            while soma!=7 or soma!=point:
                 print("A soma deu: ",soma,"e o Point foi de: ",point)
                 print("Vamos tentar de novo! Não deu 7 nem o Point!")
                 aposta=int(input("Como você quer prosseguir? Para Twelve digite 1, para Any Craps digite 2, para Field digite 3 e, para continuar no Point, digite 4: "))
                 if aposta==1:
-                    twelve(fichas1,fichas2)
                     entrar_point=False
+                    return twelve(fichas1,fichas2)
                 elif aposta==2:
-                    any_craps(fichas1,fichas2)
                     entrar_point=False
+                    return any_craps(fichas1,fichas2)
                 elif aposta==3:
-                    field(fichas1,fichas2)
                     entrar_point=False
+                    return field(fichas1,fichas2)
                 elif aposta==4:
                     entrar_point=True
-                point=soma
-                soma=roda_dados()
+                    point=soma
+                    soma=roda_dados()
             if point==soma:
                 print("A soma deu: ",soma,"e o Point foi de: ",point)
                 print("Parabéns! Você ganhou!")
