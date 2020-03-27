@@ -12,13 +12,17 @@
 #Se a soma for 2 em Field, ele ganha o que apostou + o dobro e, se sair 12, ele ganha o que apostou + o triplo
 #Any Craps= Qualquer fase do jogo. Se a soma der 2,3 ou 12 ele ganha o que apostou + 7 vezes o que apostou, caso caia algo diferente, ele perde a aposta
 #Twelve=Qualquer fase do jogo. Se a soma der 12, ele ganha o que apostou + 30x o que apostou, caso caia outra soma, ele perde a aposta
+fichas1=50
 import random
+
 def roda_dados():             #Função de roda os dados e retorna a soma deles
     dado1=random.randint(1,6)
     dado2=random.randint(1,6)
     soma=dado1 + dado2
     return soma
-def twelve(fichas1,fichas2):   #Função que determina a aposta Twelve
+
+def twelve(fichas2):   #Função que determina a aposta Twelve
+    global fichas1
     soma=roda_dados()
     fichas2=int(input("Você selecionou Twelve, quanto quer apostar? "))
     print("A soma deu: ",soma)
@@ -30,7 +34,9 @@ def twelve(fichas1,fichas2):   #Função que determina a aposta Twelve
         print("Você perdeu! Que pena!")
         fichas1-=fichas2
         print("Você está com",fichas1,"fichas")
-def field(fichas1,fichas2):     #Função que determina a posta Field
+
+def field(fichas2):     #Função que determina a posta Field
+    global fichas1
     soma=roda_dados()
     fichas2=int(input("Você selecionou Field, quanto quer apostar? "))
     print("A soma deu: ",soma)
@@ -50,7 +56,9 @@ def field(fichas1,fichas2):     #Função que determina a posta Field
         print("Field! Você tirou 12 e recebe o triplo!")
         fichas1+=fichas2*3
         print("Você está com",fichas1,"fichas")
-def any_craps(fichas1,fichas2):   #Função que determina a aposta Any Craps
+
+def any_craps(fichas2):   #Função que determina a aposta Any Craps
+    global fichas1
     soma=roda_dados()
     fichas2=int(input("Você selecionou Any Craps, quanto quer apostar? "))
     print("A soma deu: ",soma)
@@ -62,7 +70,9 @@ def any_craps(fichas1,fichas2):   #Função que determina a aposta Any Craps
         print("Você perdeu!")
         fichas1-=fichas2
         print("Você está com",fichas1,"fichas")
-def pass_line_bet(fichas1,fichas2):   #Função que determina a aposta Pass Line Bet
+
+def pass_line_bet(fichas2):   #Função que determina a aposta Pass Line Bet
+    global fichas1
     soma=roda_dados()
     fichas2=int(input("Você selecionou Pass Line Bet, quanto quer apostar? "))
     print("A soma deu: ",soma)
@@ -77,35 +87,37 @@ def pass_line_bet(fichas1,fichas2):   #Função que determina a aposta Pass Line
     elif soma==4 or soma==5 or soma==6 or soma==8 or soma==9 or soma==10:
         print("POINT! Você vai para a fase Point!")
         point=soma
-        fase_point(fichas1,fichas2,point)
-def fase_point(fichas1,fichas2,point):     #Função que determina a fase Point
+        fase_point(fichas2,point)
+
+def fase_point(fichas2,point):     #Função que determina a fase Point
+    global fichas1
     aposta=int(input("Como você quer prosseguir? Para Twelve digite 1, para Any Craps digite 2, para Field digite 3 e, para continuar no Point, digite 4 "))
     if aposta==1:
         entrar_point=False
-        twelve(fichas1,fichas2)
+        twelve(fichas2)
     elif aposta==2:
         entrar_point=False
-        any_craps(fichas1,fichas2)
+        any_craps(fichas2)
     elif aposta==3:
         entrar_point=False
-        field(fichas1,fichas2)
+        field(fichas2)
     elif aposta==4:
         entrar_point=True
         while entrar_point:
             soma=roda_dados()
-            while soma!=7 or soma!=point:
+            while soma!=7 and soma!=point:
                 print("A soma deu: ",soma,"e o Point foi de: ",point)
                 print("Vamos tentar de novo! Não deu 7 nem o Point!")
                 aposta=int(input("Como você quer prosseguir? Para Twelve digite 1, para Any Craps digite 2, para Field digite 3 e, para continuar no Point, digite 4: "))
                 if aposta==1:
                     entrar_point=False
-                    return twelve(fichas1,fichas2)
+                    return twelve(fichas2)
                 elif aposta==2:
                     entrar_point=False
-                    return any_craps(fichas1,fichas2)
+                    return any_craps(fichas2)
                 elif aposta==3:
                     entrar_point=False
-                    return field(fichas1,fichas2)
+                    return field(fichas2)
                 elif aposta==4:
                     entrar_point=True
                     point=soma
@@ -122,28 +134,32 @@ def fase_point(fichas1,fichas2,point):     #Função que determina a fase Point
                 fichas1-=fichas2
                 print("Você está com",fichas1,"fichas")
                 entrar_point=False
-fichas1=50
+
+
 pergunta=input("Você quer jogar Craps? ")
 if pergunta=="não":
     print("Ok! Até a próxima!")
-else:
+elif pergunta=="sim":
     craps=True
-    while craps:
-        print("Vamos começar a jogar!")
-        print("Você começa com",fichas1,"fichas!")
-        aposta=int(input("Que tipo de aposta você quer? Digite 1 para Twelve, 2 para Any Craps e 3 para Field ou 4 para Pass Line Bet: "))
-        fichas2=0
-        if aposta==1:
-            twelve(fichas1,fichas2)
-        elif aposta==2:
-            any_craps(fichas1,fichas2)
-        elif aposta==3:
-            field(fichas1,fichas2)
-        elif aposta==4:
-            pass_line_bet(fichas1,fichas2)
-        pergunta=input("Você quer jogar novamente? ")
-        if pergunta=="não":
-            print("Ok! Obrigado por jogar!")
-            craps=False
-        elif pergunta=="sim":
-            craps=True 
+while craps:
+    print("Vamos começar a jogar!")
+    print("Você começa com",fichas1,"fichas!")
+    aposta=int(input("Que tipo de aposta você quer? Digite 1 para Twelve, 2 para Any Craps e 3 para Field ou 4 para Pass Line Bet: "))
+    fichas2=0
+    if fichas1==0:
+        print ("Você está sem fichas, que pena! Obrigado por jogar!")
+        break
+    if aposta==1:
+        twelve(fichas2)
+    elif aposta==2:
+        any_craps(fichas2)
+    elif aposta==3:
+        field(fichas2)
+    elif aposta==4:
+        pass_line_bet(fichas2)
+    pergunta=input("Você quer jogar novamente? ")
+    if pergunta=="não":
+        print("Ok! Obrigado por jogar!")
+        craps=False
+    elif pergunta=="sim":
+        craps=True 
