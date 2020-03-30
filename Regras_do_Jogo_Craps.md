@@ -14,8 +14,8 @@ Regras:
 
 - Na aposta Field, a qual pode acontecer em qualquer parte do jogo, se a soma der 5,6,7,8 ele perde, se for 3,4,9,10 ou 11 ele ganha o mesmo que apostou + o que já tinha apostado. Se a soma for 2 em Field, ele ganha o que apostou mais o dobro e, se sair 12, ele ganha o que apostou mais o triplo.
 
--Na aposta Any Craps, a qual pode acontecer em qualquer parte do jogo, se a soma der 2,3 ou 12 ele ganha o que apostou mais 7 vezes o que apostou, caso caia algo diferente, ele perde a aposta.
+- Na aposta Any Craps, a qual pode acontecer em qualquer parte do jogo, se a soma der 2,3 ou 12 ele ganha o que apostou mais 7 vezes o que apostou, caso caia algo diferente, ele perde a aposta.
 
--Na aposta Twelve, a qual pode acontecer em qualquer parte do jogo, se a soma der 12, ele ganha o que apostou mais 30 vezes o que apostou, caso caia outra soma, ele perde a aposta.
+- Na aposta Twelve, a qual pode acontecer em qualquer parte do jogo, se a soma der 12, ele ganha o que apostou mais 30 vezes o que apostou, caso caia outra soma, ele perde a aposta.
 
--Caso o jogador faça uma aposta durante o andamento ou antes de entrar na fase Point, ele sai dessa fase e vai para a aposta, a qual acontece independentemente da fase Point.
+- Caso o jogador faça uma aposta durante o andamento ou antes de entrar na fase Point, ele sai dessa fase e vai para a aposta, a qual acontece independentemente da fase Point.
