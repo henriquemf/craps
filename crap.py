@@ -1,3 +1,4 @@
+#feito por Lívia Sayuri Makuta e Henrique Martinelli Frezzatti
 #Programa para simular o jogo de cassino Craps
 #Fase Come out e Pass Line Bet: Se a soma dos dados der 7 ou 11, ele ganha e recebe as que apostou de volta + o mesmo valor de fichas que apostou
 #Ainda nessa fase, se a soma der 2,3 ou 12 (craps), ele perde tudo que apostou
@@ -162,4 +163,4 @@ while craps:
         print("Ok! Obrigado por jogar!")
         craps=False
     elif pergunta=="sim":
-        craps=True 
+        craps=True
