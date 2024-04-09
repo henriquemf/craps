@@ -1,10 +1,15 @@
-# craps
-EP 1 - Craps
-Esse trabalho foi feito por Lívia Sayuri Makuta e Henrique Martinelli Frezzatti
-Esse programa simula uma versão simplificada do jogo Craps. 
+# EP 1 - Craps
 
--Como funciona:
-O jogo começa na fase Come Out, em que é selecionado as apostas, sendo elas Pass Line Bet, Twelve, Any Craps e Field.
+## Integrantes: 
+- Henrique Martinelli Frezzatti
+- Lívia Sayuri Makuta
+
+## Objetivo:
+O objtivo principal desse projeto é simular uma versão simplificada do jogo de apostas Craps em Python.
+
+## Como funciona?
+O jogo começa na fase `Come Out`, em que é selecionado as apostas, sendo elas Pass Line Bet, Twelve, Any Craps e Field.
+
 São rodados 2 dados, não viciados e numerados de 1 a 6, e a soma entre eles é o que determina quando se ganha ou se perde uma aposta.
 
 Regras:
